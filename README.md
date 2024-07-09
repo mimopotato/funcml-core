@@ -1,7 +1,28 @@
 # Funcml
+## Installation
 
-Funcml is designed to enhance the YAML language by offering additional functions beyond the classic data structures.
+```bash
+gem install funcml
+```
 
-Funcml was born thanks to Karist, a tool that optimizes the management of Kubernetes manifests by environment.
+## Usage
 
-This Git repository contains the sources of the implementations by language.
+```
+require "funcml"
+
+mutations = { value: "it works !" }
+struct = { key: "$value" }
+
+puts struct.mutate(mutations)[:key] # => "It works !"
+```
+
+## Development
+
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/mimopotato/funcml-lang.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

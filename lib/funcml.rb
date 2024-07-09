@@ -8,10 +8,12 @@ require_relative "funcml/patch/false"
 require_relative "funcml/patch/true"
 require_relative "funcml/patch/array"
 require_relative "funcml/patch/integer"
+require_relative "funcml/patch/symbol"
 
 module Funcml
   class Error < StandardError; end
   class MutationException < Error; end
   class LoopTypeException < Error; end
+  class UnknownConditionException < Error; end
   # Your code goes here...
 end
