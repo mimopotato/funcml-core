@@ -23,6 +23,65 @@ class Hash
     self
   end
 
+  def _if(mutations)
+    _runcond = Proc.new do |cond, mutations|
+      case cond
+      in {in: [needle, haystack]}
+      haystack.mutate(mutations).include?(needle.mutate(mutations))
+      
+      in {null: vars} 
+        vars.all? {|x| x.mutate(mutations).nil? }
+  
+      in {present: vars}
+        vars.all? {|x| !x.mutate(mutations).nil? }
+  
+      in {eq: [first, second]} 
+        first.mutate(mutations).eql?(second.mutate(mutations))
+  
+      in {ne: [first, second]} 
+        !first.mutate(mutations).eql?(second.mutate(mutations))
+  
+      in {gt: [first, second]}
+        first.mutate(mutations) > second.mutate(mutations)
+  
+      in {lt: [first, second]}
+        first.mutate(mutations) < second.mutate(mutations)
+  
+      in {ge: [first, second]}
+        first.mutate(mutations) >= second.mutate(mutations)
+  
+      in {le: [first, second]}
+        first.mutate(mutations) <= second.mutate(mutations)
+      
+      # or should evaluated by top-level if as true or false. 
+      in {or: or_conds}
+        or_conds.any? do |cond|
+          _runcond.call(cond, mutations)
+        end
+
+      else
+        raise UnknownConditionException, "#{cond.to_s} is not a valid condition"
+      end
+    end
+
+    self.fetch(:_if).then do |conditions|
+      all_conditions_state = conditions.all? do |cond|
+        _runcond.call(cond, mutations)
+      end
+
+      
+      if all_conditions_state
+        self.delete(:_if)
+        self.delete(:_else)
+        return self
+      else
+        return self[:_else] # returns nil if nothing has been set.
+      end
+
+      nil
+    end
+  end
+
   def _loop(mutations)
     self.fetch(:_loop).then do |_loop|
       items = _loop.fetch(:items, [])
