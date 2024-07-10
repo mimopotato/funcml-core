@@ -11,6 +11,7 @@ require_relative "funcml/patch/integer"
 require_relative "funcml/patch/symbol"
 
 require_relative "funcml/patch/funcs/encoding"
+require_relative "funcml/patch/funcs/cryptography"
 
 module Funcml
   class Error < StandardError; end
