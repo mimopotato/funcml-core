@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "A superset of YAML supporting variables, dictionnary merge, concatenations and global mutations<"
   spec.homepage = "https://github.com/mimopotato/funcml-lang"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
