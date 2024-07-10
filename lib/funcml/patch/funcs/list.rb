@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Hash
+  include Funcml
 
   def _first(mutations)
     self.fetch(:_first).mutate(mutations).then do |elems|
