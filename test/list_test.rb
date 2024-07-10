@@ -24,4 +24,9 @@ class ListTest < Test::Unit::TestCase
     struct = {key: {_reverse: [1, 2, 3]}}
     assert_equal struct.mutate, {key: [3, 2, 1]}
   end
+
+  test "list__uniq_returns_uniq_values" do
+    struct = {key: {_uniq: [1, 2, 3, 1, 2, 3]}}
+    assert_equal struct.mutate, {key: [1, 2, 3]}
+  end
 end

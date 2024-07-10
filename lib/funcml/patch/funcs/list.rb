@@ -26,4 +26,10 @@ class Hash
       return elems.reverse
     end
   end
+
+  def _uniq(mutations)
+    self.fetch(:_uniq).mutate(mutations).then do |elems|
+      return elems.uniq
+    end
+  end
 end
