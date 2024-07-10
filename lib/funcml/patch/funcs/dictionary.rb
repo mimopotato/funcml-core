@@ -2,7 +2,7 @@
 
 class Hash
   def _keys(mutations)
-    self.fetch(:_keys).then do |elems|
+    self.fetch(:_keys).mutate(mutations).then do |elems|
       return elems.map do |elem|
         if elem.is_a?(Hash)
           elem.keys
@@ -14,7 +14,7 @@ class Hash
   end
 
   def _values(mutations)
-    self.fetch(:_values).then do |elems|
+    self.fetch(:_values).mutate(mutations).then do |elems|
       return elems.map do |elem|
         if elem.is_a?(Hash)
           elem.values
