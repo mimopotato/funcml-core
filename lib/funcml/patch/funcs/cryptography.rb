@@ -7,4 +7,10 @@ class Hash
       return Digest::SHA1.hexdigest(value.mutate(mutations))
     end
   end
+
+  def _sha256sum(mutations)
+    self.fetch(:_sha256sum).then do |value|
+      return Digest::SHA256.hexdigest(value.mutate(mutations))
+    end
+  end
 end
