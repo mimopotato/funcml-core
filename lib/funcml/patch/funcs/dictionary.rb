@@ -30,4 +30,10 @@ class Hash
       return elems.first
     end
   end
+
+  def _tail(mutations)
+    self.fetch(:_tail).mutate(mutations).then do |elems|
+      return elems[0].last(elems[1])
+    end
+  end
 end
