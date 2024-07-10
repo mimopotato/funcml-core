@@ -14,4 +14,11 @@ class CryptographyTest < Test::Unit::TestCase
     struct = {key: {_sha1sum: ""}}
     assert_equal struct.mutate[:key], "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   end
+
+  test "crypto_sha1sum_from_mutation" do
+    struct = {key: {_sha1sum: "$value"}}
+    mutations = {value: "string"}
+
+    assert_equal struct.mutate(mutations)[:key], "ecb252044b5ea0f679ee78ec1a12904739e2904d"
+  end
 end
