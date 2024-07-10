@@ -18,5 +18,6 @@ module Funcml
   class MutationException < Error; end
   class LoopTypeException < Error; end
   class UnknownConditionException < Error; end
+  class MissingEncryptionKeyException < Error; end
   # Your code goes here...
 end
