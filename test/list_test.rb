@@ -19,4 +19,9 @@ class ListTest < Test::Unit::TestCase
     struct = {key: {_head: [[1, 2, 3], 2]}}
     assert_equal struct.mutate, {key: [1, 2]}
   end
+
+  test "list__reverse_returns_reversed_elements" do
+    struct = {key: {_reverse: [1, 2, 3]}}
+    assert_equal struct.mutate, {key: [3, 2, 1]}
+  end
 end

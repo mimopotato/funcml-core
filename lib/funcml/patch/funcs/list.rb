@@ -20,4 +20,10 @@ class Hash
       return elems[0][0..(elems[1]-1)]
     end
   end
+
+  def _reverse(mutations)
+    self.fetch(:_reverse).mutate(mutations).then do |elems|
+      return elems.reverse
+    end
+  end
 end
