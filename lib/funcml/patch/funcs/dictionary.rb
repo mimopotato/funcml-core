@@ -2,8 +2,26 @@
 
 class Hash
   def _keys(mutations)
-    self.fetch(:_keys).mutate(mutations).map do |k|
-      k.keys
-    end.flatten
+    self.fetch(:_keys).then do |elems|
+      return elems.map do |elem|
+        if elem.is_a?(Hash)
+          elem.keys
+        else
+          elem
+        end
+      end.flatten
+    end
+  end
+
+  def _values(mutations)
+    self.fetch(:_values).then do |elems|
+      return elems.map do |elem|
+        if elem.is_a?(Hash)
+          elem.values
+        else
+          elem
+        end
+      end.flatten
+    end
   end
 end

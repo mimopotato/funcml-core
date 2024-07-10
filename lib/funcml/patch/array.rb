@@ -6,8 +6,4 @@ class Array
       el.mutate(mutations)
     end
   end
-
-  def keys
-    self.first
-  end
 end
