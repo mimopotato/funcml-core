@@ -29,4 +29,9 @@ class ListTest < Test::Unit::TestCase
     struct = {key: {_uniq: [1, 2, 3, 1, 2, 3]}}
     assert_equal struct.mutate, {key: [1, 2, 3]}
   end
+
+  test "list__index_returns_index_for_value" do
+    struct = {key: {_index: [["test", "test-2", "test-3"], "test-3"]}}
+    assert_equal struct.mutate, {key: 2}
+  end
 end

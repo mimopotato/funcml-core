@@ -32,4 +32,10 @@ class Hash
       return elems.uniq
     end
   end
+
+  def _index(mutations)
+    self.fetch(:_index).mutate(mutations).then do |elems|
+      return elems[0].index(elems[1])
+    end
+  end
 end
