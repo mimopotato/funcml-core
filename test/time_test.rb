@@ -15,4 +15,16 @@ class TimeTest < Test::Unit::TestCase
     struct = {key: {_time: {value: time}}}
     assert_equal struct.mutate[:key], time
   end
+
+  test "time__ago_returns_time_minus_x" do
+    struct = {key: {_time: {value: {_ago: 600}}}}
+    assert_equal struct.mutate[:key], (Time.now - 600).strftime("%d/%m/%Y %H:%M:%S").to_s
+  end
+
+  test "time__ago_raise_error_when_not_seconds" do
+    struct = {key: {_time: {value: {_ago: :test}}}}
+    assert_raise IncorrectSecondsException do
+      struct.mutate
+    end
+  end
 end

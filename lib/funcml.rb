@@ -20,5 +20,6 @@ module Funcml
   class LoopTypeException < Error; end
   class UnknownConditionException < Error; end
   class MissingEncryptionKeyException < Error; end
+  class IncorrectSecondsException < Error; end
   # Your code goes here...
 end
