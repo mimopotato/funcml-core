@@ -24,4 +24,9 @@ class DictionaryTest < Test::Unit::TestCase
     struct = {key: {_values: [{key: :value}, {foo: :bar}]}}
     assert_equal struct.mutate, {key: [:value, :bar]}
   end
+
+  test "hash__first_returns_first_element" do
+    struct = {key: {_first: [1, 2, 3]}}
+    assert_equal struct.mutate, {key: 1}
+  end
 end

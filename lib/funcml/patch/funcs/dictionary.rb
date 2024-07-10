@@ -24,4 +24,10 @@ class Hash
       end.flatten
     end
   end
+
+  def _first(mutations)
+    self.fetch(:_first).mutate(mutations).then do |elems|
+      return elems.first
+    end
+  end
 end
