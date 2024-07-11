@@ -189,4 +189,16 @@ class HashTest < Test::Unit::TestCase
 
     assert_equal struct.mutate, {value: :else}
   end
+
+  test "hash__until_returns_array_of_values" do
+    struct = {key: {_until: 3, value: "$item"}}
+    expect = {
+      key: [
+        {value: 0},
+        {value: 1},
+        {value: 2},
+      ]
+    }
+    assert_equal struct.mutate, expect 
+  end
 end
