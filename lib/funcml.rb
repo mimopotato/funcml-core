@@ -9,6 +9,7 @@ require_relative "funcml/patch/true"
 require_relative "funcml/patch/array"
 require_relative "funcml/patch/integer"
 require_relative "funcml/patch/symbol"
+require_relative "funcml/patch/float"
 
 require_relative "funcml/patch/funcs/encoding"
 require_relative "funcml/patch/funcs/cryptography"

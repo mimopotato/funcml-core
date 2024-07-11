@@ -12,4 +12,10 @@ class Hash
       numbers.mutate(mutations).reduce(:-)
     end
   end
+
+  def _div(mutations)
+    self.fetch(:_div, []).then do |numbers|
+      numbers.mutate(mutations).reduce(:/)
+    end
+  end
 end
