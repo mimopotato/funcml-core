@@ -111,7 +111,8 @@ class Hash
     _results = []
     amount = self.fetch(:_until)
     amount.times do |i|
-      _results << self.dup.except(:_until).mutate(mutations.merge(item: i))
+      _results << self.dup.select{|k, v| k != :_until}
+        .mutate(mutations.merge(item: i))
     end
 
     return _results
