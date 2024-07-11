@@ -107,6 +107,16 @@ class Hash
     end
   end
 
+  def _until(mutations)
+    _results = []
+    amount = self.fetch(:_until)
+    amount.times do |i|
+      _results << self.dup.except(:_until).mutate(mutations.merge(item: i))
+    end
+
+    return _results
+  end
+
   # _sum takes and mutates all elements in array and
   # sums them.
   # eg: {_sum: [1, 2, 3]} = 6
