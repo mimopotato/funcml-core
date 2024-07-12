@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "lib/funcml/version"
+require_relative "lib/funcml-core/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "funcml"
+  spec.name = "funcml-core"
   spec.version = Funcml::VERSION
   spec.authors = ["Mimopotato"]
   spec.email = ["173955441+mimopotato@users.noreply.github.com"]
 
-  spec.summary = "funcml-lang implementation, in Ruby"
-  spec.description = "A superset of YAML supporting variables, dictionnary merge, concatenations and global mutations<"
+  spec.summary = "funcml-core"
+  spec.description = "A library that implements mutations on data-structures"
   spec.homepage = "https://github.com/mimopotato/funcml-lang"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/mimopotato/funcml-lang"
-  spec.metadata["changelog_uri"] = "https://github.com/mimopotato/funcml-lang"
+  spec.metadata["source_code_uri"] = "https://github.com/mimopotato/funcml-core"
+  spec.metadata["changelog_uri"] = "https://github.com/mimopotato/funcml-core"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
