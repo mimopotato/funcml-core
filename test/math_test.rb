@@ -52,4 +52,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_min: ["$first", 3, 4, 7, 2, 5]}
     assert_equal struct.mutate(first: 1), 1
   end
+
+  test "math__max_mutates_calling_block" do
+    struct = {_max: [1, 3, 4, 7, 2, 5]}
+    assert_equal struct.mutate, 7
+
+    struct = {_max: ["$first", 3, 4, 7, 2, 5]}
+    assert_equal struct.mutate(first: 1), 7
+  end
 end

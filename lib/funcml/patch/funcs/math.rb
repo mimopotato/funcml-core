@@ -37,4 +37,10 @@ class Hash
       numbers.mutate(mutations).min
     end
   end
+
+  def _max(mutations)
+    self.fetch(:_max, []).then do |numbers|
+      numbers.mutate(mutations).max
+    end
+  end
 end
