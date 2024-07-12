@@ -61,7 +61,7 @@ class MathTest < Test::Unit::TestCase
     assert_equal struct.mutate(first: 1), 7
   end
 
-  test "math_floor_mutates_calling_block" do
+  test "math__floor_mutates_calling_block" do
     struct = {_floor: 1.1}
     assert_equal struct.mutate, 1
 
@@ -69,11 +69,19 @@ class MathTest < Test::Unit::TestCase
     assert_equal struct.mutate(floor: 1.1), 1
   end
 
-  test "math_ceil_mutates_calling_block" do
+  test "math__ceil_mutates_calling_block" do
     struct = {_ceil: 1.1}
     assert_equal struct.mutate, 2
 
     struct = {_ceil: "$ceil"}
     assert_equal struct.mutate(ceil: 1.1), 2
+  end
+
+  test "math__round_mutateS_calling_block" do
+    struct = {_round: 1.1}
+    assert_equal struct.mutate, 1
+
+    struct = {_round: "$round"}
+    assert_equal struct.mutate(round: 1.9), 2
   end
 end

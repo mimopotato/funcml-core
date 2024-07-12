@@ -55,4 +55,10 @@ class Hash
       number.mutate(mutations).ceil
     end
   end
+
+  def _round(mutations)
+    self.fetch(:_round).then do |number|
+      number.mutate(mutations).round
+    end
+  end
 end
