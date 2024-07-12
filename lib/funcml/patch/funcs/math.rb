@@ -18,4 +18,11 @@ class Hash
       numbers.mutate(mutations).reduce(:/)
     end
   end
+
+  def _mod(mutations)
+    self.fetch(:_mod).then do |numbers|
+      first, second = numbers.mutate(mutations)
+      first % second
+    end
+  end
 end

@@ -28,4 +28,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_div: ["$first", "$second"]}
     assert_equal struct.mutate(first: 3.0, second: 2.0), 1.5
   end
+
+  test "math__mod_mutates_calling_block" do
+    struct = {_mod: [2, 3]}
+    assert_equal struct.mutate, 2
+
+    struct = {_mod: ["$first", "$second"]}
+    assert_equal struct.mutate(first: 2, second: 3), 2
+  end
 end
