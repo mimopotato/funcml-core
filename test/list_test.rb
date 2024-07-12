@@ -34,4 +34,18 @@ class ListTest < Test::Unit::TestCase
     struct = {key: {_index: [["test", "test-2", "test-3"], "test-3"]}}
     assert_equal struct.mutate, {key: 2}
   end
+
+  test "list__len_mutates_calling_block" do
+    struct = {_len: [1, 2, 3]}
+    assert_equal struct.mutate, 3
+
+    struct = {_len: "$first"}
+    assert_equal struct.mutate(first:[1, 2, 3]), 3
+
+    struct = {_len: "test"}
+    assert_equal struct.mutate, 4
+
+    struct = {_len: {key: :value, foo: :bar}}
+    assert_equal struct.mutate, 2
+  end
 end
