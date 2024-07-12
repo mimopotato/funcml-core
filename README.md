@@ -2,13 +2,13 @@
 ## Installation
 
 ```bash
-gem install funcml
+gem install funcml-core
 ```
 
 ## Usage
 
 ```
-require "funcml"
+require "funcml-core"
 
 mutations = { value: "it works !" }
 struct = { key: "$value" }
