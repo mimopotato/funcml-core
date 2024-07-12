@@ -25,4 +25,10 @@ class Hash
       first % second
     end
   end
+
+  def _mul(mutations)
+    self.fetch(:_mul, []).then do |numbers|
+      numbers.mutate(mutations).reduce(:*)
+    end
+  end
 end

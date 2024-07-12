@@ -36,4 +36,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_mod: ["$first", "$second"]}
     assert_equal struct.mutate(first: 2, second: 3), 2
   end
+
+  test "math__mul_mutates_calling_block" do
+    struct = {_mul: [2, 3]}
+    assert_equal struct.mutate, 6
+
+    struct = {_mul: ["$first", "$second"]}
+    assert_equal struct.mutate(first: 2, second: 3), 6
+  end
 end
