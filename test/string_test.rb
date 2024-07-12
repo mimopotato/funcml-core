@@ -41,4 +41,10 @@ class StringTest < Test::Unit::TestCase
       struct.mutate(mutations)
     end
   end
+
+  test "string__uuidv4_returns_new_uuid" do
+    struct = {key: "$uuidv4"}
+    assert_equal struct.mutate[:key].class, String
+    assert_equal struct.mutate[:key].length, 36
+  end
 end
