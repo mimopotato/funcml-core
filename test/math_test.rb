@@ -44,4 +44,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_mul: ["$first", "$second"]}
     assert_equal struct.mutate(first: 2, second: 3), 6
   end
+
+  test "math__min_mutates_calling_block" do
+    struct = {_min: [1, 3, 4, 7, 2, 5]}
+    assert_equal struct.mutate, 1
+
+    struct = {_min: ["$first", 3, 4, 7, 2, 5]}
+    assert_equal struct.mutate(first: 1), 1
+  end
 end

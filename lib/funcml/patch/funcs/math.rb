@@ -31,4 +31,10 @@ class Hash
       numbers.mutate(mutations).reduce(:*)
     end
   end
+
+  def _min(mutations)
+    self.fetch(:_min, []).then do |numbers|
+      numbers.mutate(mutations).min
+    end
+  end
 end
