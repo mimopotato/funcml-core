@@ -38,4 +38,10 @@ class Hash
       return elems[0].index(elems[1])
     end
   end
+
+  def _len(mutations)
+    self.fetch(:_len).then do |elems|
+      elems.mutate(mutations).length
+    end
+  end
 end
