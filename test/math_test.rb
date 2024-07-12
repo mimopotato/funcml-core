@@ -68,4 +68,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_floor: "$floor"}
     assert_equal struct.mutate(floor: 1.1), 1
   end
+
+  test "math_ceil_mutates_calling_block" do
+    struct = {_ceil: 1.1}
+    assert_equal struct.mutate, 2
+
+    struct = {_ceil: "$ceil"}
+    assert_equal struct.mutate(ceil: 1.1), 2
+  end
 end

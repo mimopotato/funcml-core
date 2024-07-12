@@ -49,4 +49,10 @@ class Hash
       number.mutate(mutations).floor
     end
   end
+
+  def _ceil(mutations)
+    self.fetch(:_ceil).then do |number|
+      number.mutate(mutations).ceil
+    end
+  end
 end
