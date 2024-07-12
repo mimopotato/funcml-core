@@ -43,4 +43,10 @@ class Hash
       numbers.mutate(mutations).max
     end
   end
+
+  def _floor(mutations)
+    self.fetch(:_floor).then do |number|
+      number.mutate(mutations).floor
+    end
+  end
 end

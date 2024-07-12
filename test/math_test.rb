@@ -60,4 +60,12 @@ class MathTest < Test::Unit::TestCase
     struct = {_max: ["$first", 3, 4, 7, 2, 5]}
     assert_equal struct.mutate(first: 1), 7
   end
+
+  test "math_floor_mutates_calling_block" do
+    struct = {_floor: 1.1}
+    assert_equal struct.mutate, 1
+
+    struct = {_floor: "$floor"}
+    assert_equal struct.mutate(floor: 1.1), 1
+  end
 end
