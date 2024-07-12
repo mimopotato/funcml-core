@@ -148,6 +148,12 @@ class Hash
         .join(concat.fetch(:sep, ""))
     end
   end
+  
+  def _readfile(mutations)
+    self.fetch(:_readfile).then do |path|
+      File.read(path)
+    end
+  end
 
   def dig_from_str(path, mutations)
     path_array_sym = path.split('.').map do |sub|
@@ -156,4 +162,5 @@ class Hash
 
     self.dig(*path_array_sym).mutate(mutations)
   end
+
 end
