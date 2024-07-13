@@ -84,7 +84,7 @@ class Hash
 
   def _loop(mutations)
     self.fetch(:_loop).then do |_loop|
-      items = _loop.fetch(:items, [])
+      items = _loop.fetch(:items, []).mutate(mutations)
       _results = []
       
       # guard clause related to allowed types
@@ -93,8 +93,6 @@ class Hash
       end
 
       # always mutate all items as they could be variable calling hashes.
-      items = items.mutate(mutations)
-
       # when caller is a string, will be callable as $item for String
       # when caller is a Hash, will be callable as $item.path.to.value for String
       items.each do |item|
