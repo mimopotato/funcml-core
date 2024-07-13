@@ -17,6 +17,7 @@ require_relative "funcml-core/patch/funcs/time"
 require_relative "funcml-core/patch/funcs/dictionary"
 require_relative "funcml-core/patch/funcs/list"
 require_relative "funcml-core/patch/funcs/math"
+require_relative "funcml-core/patch/funcs/cast"
 
 module Funcml
   class Error < StandardError; end
