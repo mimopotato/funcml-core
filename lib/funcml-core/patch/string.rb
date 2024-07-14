@@ -11,7 +11,7 @@ class String
       return SecureRandom.uuid if self.eql?('$uuidv4')
 
       mutations.dig_from_str(self.gsub('$', ''), mutations).then do |value|
-        raise MutationException, "#{self} not found in mutations" if value.nil?
+        raise MutationException, "`#{self}` not found in mutations, available mutations: #{mutations.to_s}" if value.nil?
         return value.mutate(mutations)
       end
     end

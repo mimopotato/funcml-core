@@ -143,7 +143,8 @@ class Hash
   def _concat(mutations)
     self.fetch(:_concat).then do |concat|
       return concat.fetch(:items, [])
-        .join(concat.fetch(:sep, ""))
+        .mutate(mutations)
+        .join(concat.fetch(:sep, "").mutate(mutations))
     end
   end
   

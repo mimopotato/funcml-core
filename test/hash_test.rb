@@ -201,4 +201,31 @@ class HashTest < Test::Unit::TestCase
     }
     assert_equal struct.mutate, expect 
   end
+
+  test "readme_example_is_correct" do
+    struct = {
+      mutations: {
+        first: "hello",
+        second: "world",
+        third: "!"
+      },
+      key: {
+        value: {
+          _if: [
+            {eq: [{_last: '$mutations'}, "!"]}
+          ],
+          _concat: {
+            items: [
+              '$mutations.first', 
+              '$mutations.second', 
+              '$mutations.third'
+            ],
+            sep: " "
+          }
+        }
+      }
+    }
+
+    assert_equal struct[:key].mutate(struct), {value: "hello world !"}
+  end
 end
