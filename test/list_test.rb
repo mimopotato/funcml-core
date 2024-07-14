@@ -10,6 +10,11 @@ class ListTest < Test::Unit::TestCase
     assert_equal struct.mutate, {key: 1}
   end
 
+  test "list__last_returns_last_element" do
+    struct = {key: {_last: [1, 2, 3]}}
+    assert_equal struct.mutate, {key: 3}
+  end
+
   test "list__tail_returns_n_elements" do
     struct = {key: {_tail: [[1, 2, 3], 2]}}
     assert_equal struct.mutate, {key: [2, 3]}

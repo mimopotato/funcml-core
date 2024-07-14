@@ -9,6 +9,16 @@ class Hash
     end
   end
 
+  def _last(mutations)
+    self.fetch(:_last).mutate(mutations).then do |elems|
+      if elems.is_a?(Hash)
+        return elems.values.last
+      else
+        return elems.last
+      end
+    end
+  end
+
   def _tail(mutations)
     self.fetch(:_tail).mutate(mutations).then do |elems|
       return elems[0].last(elems[1])
