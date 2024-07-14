@@ -1,4 +1,4 @@
-# Funcml
+# funcml-core
 
 Funcml-core extends the standard Ruby classes (String, Integer, Hash, Array, etc.) to provide a framework for data structures. This framework makes it possible to perform mutations on data structures and is at the heart of the funcml-cli project.
 
