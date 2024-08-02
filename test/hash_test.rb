@@ -190,6 +190,24 @@ class HashTest < Test::Unit::TestCase
     assert_equal struct.mutate, {value: :else}
   end
 
+  test "hash__if_match" do
+    struct = {
+      _if: [{match: ["test", "^test$"]}],
+      value: "if"
+    }
+
+    assert_equal struct.mutate, {value: "if"}
+  end
+
+  test "hash__if_unmatch" do
+    struct = {
+      _if: [{unmatch: ["test", "^value$"]}],
+      value: "if"
+    }
+
+    assert_equal struct.mutate, {value: "if"}
+  end
+
   test "hash__until_returns_array_of_values" do
     struct = {key: {_until: 3, value: "$item"}}
     expect = {

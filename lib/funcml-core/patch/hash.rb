@@ -53,6 +53,12 @@ class Hash
       in {le: [first, second]}
         first.mutate(mutations) <= second.mutate(mutations)
       
+      in {match: [first, second]}
+        first.match?(Regexp.new(second))
+
+      in {unmatch: [first, second]}
+        !first.match?(Regexp.new(second))
+
       # or should evaluated by top-level if as true or false. 
       in {or: or_conds}
         or_conds.any? do |cond|
