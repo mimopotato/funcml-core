@@ -246,4 +246,17 @@ class HashTest < Test::Unit::TestCase
 
     assert_equal struct[:key].mutate(struct), {value: "hello world !"}
   end
+
+  test "hash__replace_contents" do
+    struct = {
+      key: {
+        _replace: {
+          content: "a-b-c",
+          substitutions: [["-", "."], ["b", "z"]]
+        }
+      }
+    }
+
+    assert_equal struct.mutate, {key: "a.z.c"}
+  end
 end

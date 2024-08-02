@@ -160,6 +160,17 @@ class Hash
     end
   end
 
+  def _replace(mutations)
+    self.fetch(:_replace).then do |ctx|
+      content = ctx.fetch(:content)
+      ctx.fetch(:substitutions).each do |from, to|
+        content = content.gsub(from, to)
+      end
+
+      content
+    end
+  end
+
   def dig_from_str(path, mutations)
     path_array_sym = path.split('.').map do |sub|
       sub.to_sym
