@@ -31,4 +31,16 @@ class CastTest < Test::Unit::TestCase
     struct = {_float: "1.0"}
     assert_equal struct.mutate, 1.0
   end
+
+  test "cast__json_parses_struct_to_string" do
+    struct = {
+      key: {
+        _json: {
+          test: "$value"
+        }
+      }
+    }
+
+    assert_equal struct.mutate({value: "abc"}), {key: '{"test":"abc"}'}
+  end
 end
