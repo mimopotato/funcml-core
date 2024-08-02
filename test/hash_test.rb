@@ -259,4 +259,14 @@ class HashTest < Test::Unit::TestCase
 
     assert_equal struct.mutate, {key: "a.z.c"}
   end
+
+  test "hash_escape_works" do
+    struct = {
+      key: {
+        :'\_subkey' => 'value',
+      }
+    }
+
+    assert_equal struct.mutate, {key: {_subkey: 'value'}}
+  end
 end
