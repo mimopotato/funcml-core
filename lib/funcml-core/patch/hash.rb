@@ -178,5 +178,4 @@ class Hash
 
     self.dig(*path_array_sym).mutate(mutations)
   end
-
 end

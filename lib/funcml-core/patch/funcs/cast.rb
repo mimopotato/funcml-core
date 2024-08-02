@@ -25,4 +25,14 @@ class Hash
       obj.mutate(mutations).to_json
     end
   end
+
+  def _fromJson(mutations)
+    self.fetch(:_fromJson).then do |obj|
+      # usage of symbolize_names instead of deep_symbolize_keys as it is only
+      # implemented in funcml-cli.
+      JSON.parse(obj, symbolize_names: true).then do |struct|
+        struct.mutate(mutations)
+      end
+    end
+  end
 end
