@@ -7,6 +7,15 @@ class Hash
     # dup is here to avoid iteration error on #delete/#merge
     self.dup.each do |key, value|
       case key
+      in /^\\_.*$/
+        # escapes keys starting with backslash (\).
+        # gsub is only implemented on String, not Symbol - this is why
+        # we cast the key to string before re-casting it to sym later.
+        escaped_key = key.to_s
+          .gsub('\\_', '_')
+
+        self[escaped_key.to_sym] = value.mutate(mutations)
+        self.delete(key)
       in /^_.*$/
         # recursive mutation of result from pattern-matched _method
         # once recursively mutated, we return the final object by guard
