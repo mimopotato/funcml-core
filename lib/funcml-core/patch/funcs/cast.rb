@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "json"
 
 class Hash
   def _string(mutations)
@@ -16,6 +17,12 @@ class Hash
   def _float(mutations)
     self.fetch(:_float).then do |obj|
       obj.mutate(mutations).to_f
+    end
+  end
+
+  def _json(mutations)
+    self.fetch(:_json).then do |obj|
+      obj.mutate(mutations).to_json
     end
   end
 end
