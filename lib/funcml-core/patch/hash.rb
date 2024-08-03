@@ -32,6 +32,14 @@ class Hash
     self
   end
 
+  def _map(mutations)
+    self.fetch(:_map).then do |ctx|
+      ctx.fetch(:items, []).mutate(mutations).map do |item|
+        {ctx.fetch(:call).to_sym => item}.mutate(mutations)
+      end
+    end
+  end
+
   def _if(mutations)
     _runcond = Proc.new do |cond, mutations|
       case cond
