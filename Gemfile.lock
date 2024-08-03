@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    funcml-core (0.9.3.pre.patch1)
+    funcml-core (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -12,7 +12,11 @@ GEM
       power_assert
 
 PLATFORMS
+  arm-linux
   arm64-darwin-23
+  armv7-linux
+  universal-darwin-8
+  x86-freebsd
   x86_64-linux
 
 DEPENDENCIES
