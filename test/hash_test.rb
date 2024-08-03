@@ -269,4 +269,52 @@ class HashTest < Test::Unit::TestCase
 
     assert_equal struct.mutate, {key: {_subkey: 'value'}}
   end
+
+  test "hash__upcase" do
+    struct = {
+      key: {
+        _upcase: "abc"
+      }
+    }
+
+    assert_equal struct.mutate, {key: "ABC"}
+  end
+
+  test "hash__downcase" do
+    struct = {
+      key: {
+        _downcase: "ABC"
+      }
+    }
+
+    assert_equal struct.mutate, {key: "abc"}
+  end
+
+  test "hash__capitalize" do
+    struct = {
+      key: {
+        _capitalize: "abc"
+      }
+    }
+
+    assert_equal struct.mutate, {key: "Abc"}
+  end
+
+  test "hash__up_down_cap" do
+    struct = {
+      key: {
+        _capitalize: {
+          _concat: {
+            items: [
+              {_upcase: "abc"},
+              {_downcase: "DEF"},
+            ],
+            sep: "-"
+          }
+        }
+      }
+    }
+
+    assert_equal struct.mutate, {key: "Abc-def"}
+  end
 end
