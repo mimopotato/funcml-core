@@ -317,4 +317,17 @@ class HashTest < Test::Unit::TestCase
 
     assert_equal struct.mutate, {key: "Abc-def"}
   end
+
+  test "hash__map_block_call" do
+    struct = {
+      key: {
+        _map: {
+          items: ["a", "b", "c"],
+          call: "_upcase"
+        }
+      }
+    }
+
+    assert_equal struct.mutate, {key: ["A", "B", "C"]}
+  end
 end
