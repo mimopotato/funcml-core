@@ -173,10 +173,28 @@ class Hash
     self.fetch(:_replace).then do |ctx|
       content = ctx.fetch(:content)
       ctx.fetch(:substitutions).each do |from, to|
-        content = content.gsub(from, to)
+        content = content.gsub(from.mutate(mutations), to.mutate(mutations))
       end
 
       content
+    end
+  end
+
+  def _upcase(mutations)
+    self.fetch(:_upcase).then do |ctx|
+      return ctx.mutate(mutations).upcase
+    end
+  end
+
+  def _downcase(mutations)
+    self.fetch(:_downcase).then do |ctx|
+      return ctx.mutate(mutations).downcase
+    end
+  end
+
+  def _capitalize(mutations)
+    self.fetch(:_capitalize).then do |ctx|
+      return ctx.mutate(mutations).capitalize
     end
   end
 
