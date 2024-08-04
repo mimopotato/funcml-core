@@ -12,10 +12,10 @@ class RandomTest < Test::Unit::TestCase
   end
 
   test "random__randomNumber_bounds" do
+    100.times do
     struct = {key: {_randomNumber: {min: 1, max: 2}}}
-    10.times do
       result = struct.mutate
-      assert result[:key] > 1 && result[:key] < 3
+      assert [1, 2].include?(result[:key])
     end
   end
 end
