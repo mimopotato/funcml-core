@@ -13,7 +13,7 @@ class RandomTest < Test::Unit::TestCase
 
   test "random__randomNumber_bounds" do
     100.times do
-    struct = {key: {_randomNumber: {min: 1, max: 2}}}
+      struct = {key: {_randomNumber: {min: 1, max: 2}}}
       result = struct.mutate
       assert [1, 2].include?(result[:key])
     end
