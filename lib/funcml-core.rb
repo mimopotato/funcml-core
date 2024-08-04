@@ -18,6 +18,7 @@ require_relative "funcml-core/patch/funcs/dictionary"
 require_relative "funcml-core/patch/funcs/list"
 require_relative "funcml-core/patch/funcs/math"
 require_relative "funcml-core/patch/funcs/cast"
+require_relative "funcml-core/patch/funcs/random"
 
 module Funcml
   class Error < StandardError; end
