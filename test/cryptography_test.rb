@@ -39,6 +39,11 @@ class CryptographyTest < Test::Unit::TestCase
     assert_equal struct.mutate(mutations)[:key], "473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8"
   end
 
+  test "crypto__md5sum" do
+    struct = {key: {_md5sum: "$value" }}
+    assert_equal struct.mutate(value: "test")[:key], "098f6bcd4621d373cade4e832627b4f6"
+  end
+
   test "crypto__encryptAES_raise_in_missing_key" do
     assert_raise MissingEncryptionKeyException do
       struct = {key: {_encryptAES: {data: "data"}}}

@@ -17,6 +17,12 @@ class Hash
     end
   end
 
+  def _md5sum(mutations)
+    self.fetch(:_md5sum).then do |value|
+      return Digest::MD5.hexdigest(value.mutate(mutations))
+    end
+  end
+
   # source https://gist.github.com/wteuber/5318013
   def _encryptAES(mutations)
     self.fetch(:_encryptAES).then do |blk|
