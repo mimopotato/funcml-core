@@ -18,4 +18,9 @@ class RandomTest < Test::Unit::TestCase
       assert [1, 2].include?(result[:key])
     end
   end
+
+  test "random__randomNumber_floats" do
+    struct = {key: {_randomNumber: {min: 1.0, max: 2.0}}}
+    assert_equal struct.mutate[:key].class, Float
+  end
 end
