@@ -47,4 +47,25 @@ class StringTest < Test::Unit::TestCase
     assert_equal struct.mutate[:key].class, String
     assert_equal struct.mutate[:key].length, 36
   end
+
+  test "string__env_returns_env_variable" do
+    struct = {key: {_env: "TEST"}}
+    ENV["TEST"] = "true"
+
+    assert_equal struct.mutate, {key: "true"}
+  end
+
+  test "string__strictEnv_raise_when_missing" do
+    struct = {key: {_strictEnv: "TEST" }}
+    ENV["TEST"] = nil
+    assert_raise MissingEnvVariableStrictException do
+      struct.mutate
+    end
+  end
+
+  test "string__env_is_upcased" do
+    struct = {key: {_env: "test"}}
+    ENV["TEST"] = "test"
+    assert_equal struct.mutate, {key: "test"}
+  end
 end

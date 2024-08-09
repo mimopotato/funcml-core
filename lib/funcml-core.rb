@@ -19,6 +19,7 @@ require_relative "funcml-core/patch/funcs/list"
 require_relative "funcml-core/patch/funcs/math"
 require_relative "funcml-core/patch/funcs/cast"
 require_relative "funcml-core/patch/funcs/random"
+require_relative "funcml-core/patch/funcs/env"
 
 module Funcml
   class Error < StandardError; end
@@ -27,5 +28,6 @@ module Funcml
   class UnknownConditionException < Error; end
   class MissingEncryptionKeyException < Error; end
   class IncorrectSecondsException < Error; end
+  class MissingEnvVariableStrictException < Error; end
   # Your code goes here...
 end
