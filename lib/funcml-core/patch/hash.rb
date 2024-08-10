@@ -177,6 +177,15 @@ class Hash
     end
   end
 
+  def _import(mutations)
+    self.fetch(:_import).then do |path|
+      {_readfile: path.mutate(mutations)}
+        .mutate(mutations).then do |file_content|
+          {_fromJson: file_content}.mutate(mutations)
+      end
+    end
+  end
+
   def _replace(mutations)
     self.fetch(:_replace).then do |ctx|
       content = ctx.fetch(:content)
