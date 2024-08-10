@@ -17,7 +17,7 @@ class FilexTest < Test::Unit::TestCase
     File.delete("./test.txt")
   end
 
-  test "file__import_returns_struct" do
+  test "file__import_returns_struct_json" do
     struct1 = {key: "value"}
     tmpfile = Tempfile.create('struct1')
     tmpfile.write(struct1.to_json)
@@ -26,6 +26,16 @@ class FilexTest < Test::Unit::TestCase
     struct2 = {data: {_import: tmpfile.path }}
     result = struct2.mutate
     assert_equal result, {data: {key: "value"}}
-    puts result
+  end
+
+  test "file__import_returns_struct_yaml" do
+    struct1 = {"key" => "value"}
+    tmpfile = Tempfile.create('struct1')
+    tmpfile.write(struct1.to_yaml)
+    tmpfile.close
+
+    struct2 = {data: {_import: tmpfile.path }}
+    result = struct2.mutate
+    assert_equal result, {data: {"key" => "value"}}
   end
 end

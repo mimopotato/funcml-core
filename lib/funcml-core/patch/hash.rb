@@ -181,7 +181,11 @@ class Hash
     self.fetch(:_import).then do |path|
       {_readfile: path.mutate(mutations)}
         .mutate(mutations).then do |file_content|
-          {_fromJson: file_content}.mutate(mutations)
+          begin
+            {_fromJson: file_content}.mutate(mutations)
+          rescue JSON::ParserError
+            {_fromYaml: file_content}.mutate(mutations)
+          end
       end
     end
   end
