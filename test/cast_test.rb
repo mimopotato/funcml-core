@@ -62,6 +62,16 @@ class CastTest < Test::Unit::TestCase
     }
 
     assert_equal struct.mutate(value: "abc")[:key], "---\n" + "test: abc\n"
+
+    struct = {
+      key: {
+        _yaml: {
+          test: "$value"
+        }
+      }
+    }
+
+    assert_equal struct.mutate(value: "abc")[:key], "---\n" + "test: abc\n"
   end
 
   test "cast__fromYaml_parse_yaml_to_struct" do

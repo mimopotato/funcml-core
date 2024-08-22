@@ -39,7 +39,7 @@ class Hash
 
   def _yaml(mutations)
     self.fetch(:_yaml).then do |obj|
-      obj.mutate(mutations).to_yaml
+      obj.mutate(mutations).deep_stringify_keys.to_yaml
     end
   end
 

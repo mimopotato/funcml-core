@@ -45,38 +45,38 @@ class Hash
       case cond
       in {in: [needle, haystack]}
       haystack.mutate(mutations).include?(needle.mutate(mutations))
-      
-      in {null: vars} 
+
+      in {null: vars}
         vars.all? {|x| x.mutate(mutations).nil? }
-  
+
       in {present: vars}
         vars.all? {|x| !x.mutate(mutations).nil? }
-  
-      in {eq: [first, second]} 
+
+      in {eq: [first, second]}
         first.mutate(mutations).eql?(second.mutate(mutations))
-  
-      in {ne: [first, second]} 
+
+      in {ne: [first, second]}
         !first.mutate(mutations).eql?(second.mutate(mutations))
-  
+
       in {gt: [first, second]}
         first.mutate(mutations) > second.mutate(mutations)
-  
+
       in {lt: [first, second]}
         first.mutate(mutations) < second.mutate(mutations)
-  
+
       in {ge: [first, second]}
         first.mutate(mutations) >= second.mutate(mutations)
-  
+
       in {le: [first, second]}
         first.mutate(mutations) <= second.mutate(mutations)
-      
+
       in {match: [first, second]}
         first.match?(Regexp.new(second))
 
       in {unmatch: [first, second]}
         !first.match?(Regexp.new(second))
 
-      # or should evaluated by top-level if as true or false. 
+      # or should evaluated by top-level if as true or false.
       in {or: or_conds}
         or_conds.any? do |cond|
           _runcond.call(cond, mutations)
@@ -92,7 +92,7 @@ class Hash
         _runcond.call(cond, mutations)
       end
 
-      
+
       if all_conditions_state
         self.delete(:_if)
         self.delete(:_else)
@@ -109,7 +109,7 @@ class Hash
     self.fetch(:_loop).then do |_loop|
       items = _loop.fetch(:items, []).mutate(mutations)
       _results = []
-      
+
       # guard clause related to allowed types
       unless items.is_a?(Array)
         raise LoopTypeException, "_loop only supports Array as items"
@@ -170,7 +170,7 @@ class Hash
         .join(concat.fetch(:sep, "").mutate(mutations))
     end
   end
-  
+
   def _readfile(mutations)
     self.fetch(:_readfile).then do |path|
       File.read(path)
@@ -226,4 +226,31 @@ class Hash
 
     self.dig(*path_array_sym).mutate(mutations)
   end
+
+  def deep_symbolize_keys
+    deep_transform_keys { |key| key.to_sym rescue key }
+  end
+
+  def deep_transform_keys(&block)
+    _deep_transform_keys_in_object(self, &block)
+  end
+
+  def deep_stringify_keys
+    deep_transform_keys(&:to_s)
+  end
+
+  private
+    # Support methods for deep transforming nested hashes and arrays.
+    def _deep_transform_keys_in_object(object, &block)
+      case object
+      when Hash
+        object.each_with_object(self.class.new) do |(key, value), result|
+          result[yield(key)] = _deep_transform_keys_in_object(value, &block)
+        end
+      when Array
+        object.map { |e| _deep_transform_keys_in_object(e, &block) }
+      else
+        object
+      end
+    end
 end
